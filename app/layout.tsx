@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import "../styles/global.scss";
+import "../styles/global.sass";
 
 export const metadata: Metadata = {
   title: "Too Doo",

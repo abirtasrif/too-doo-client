@@ -1,9 +1,7 @@
-import variables from "@/styles/variables.module.scss";
-
 const Navbar = () => {
   return (
-    <div className="navbar" style={{ backgroundColor: variables.primaryColor }}>
-      <h3 style={{ color: variables.secondaryColor }}>
+    <div className="navbar">
+      <h3>
         Too <span className="green">Doo</span>
       </h3>
     </div>
