@@ -1,0 +1,15 @@
+$primary-color: #111618;
+$secondary-color: #b8ead9;
+$accent1: #c0f984;
+$accent2: #fd593d;
+$textBig: 30px;
+$textSmall: 15px;
+
+:export {
+  primaryColor: $primary-color;
+  secondaryColor: $secondary-color;
+  accGreen: $accent1;
+  accRed: $accent2;
+  fontLarge: $textBig;
+  fontSmall: $textSmall;
+}
