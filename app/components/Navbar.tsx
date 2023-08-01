@@ -1,8 +1,12 @@
+import Link from "next/link";
+
 const Navbar = () => {
   return (
     <div className="navbar">
       <h3>
-        Too <span className="green">Doo</span>
+        <Link href="/" className="link">
+          Too <span>Doo</span>
+        </Link>
       </h3>
     </div>
   );

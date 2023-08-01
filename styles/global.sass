@@ -29,19 +29,37 @@ $noteFont: "Kalam", cursive
   font-size: $textBig
   padding: 1.1rem $padding 0 $padding
 
+.navbar
+  span 
+    color: $green
+
+.navbar
+  .link
+    color: $light    
+  
+
 
 .navbar,
 .footer 
   height: 5rem
   font-family: $titleFont
   background-color: $lt-dark
-  color: $light
+
 
 
 .footer 
   font-size: $textSmall
   padding-top: 1.8rem
   text-align: center
+
+.footer
+  h3
+    color: $light
+    opacity: 0.8
+    
+.footer
+  span
+    color: $red
 
 
 .main 
@@ -51,3 +69,19 @@ $noteFont: "Kalam", cursive
   font-family: $noteFont
   padding: $padding $padding 0 $padding
   font-size: 20px
+
+.notes-wrapper
+  display: flex
+  flex-wrap: wrap
+  gap: 2rem
+
+.note-card-buttons
+  display: flex
+  gap: 1rem
+
+.note-card-buttons
+  button
+    padding: 0.5rem
+    border-radius: 5rem
+    
+    
