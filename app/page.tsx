@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import moment from "moment";
+import NoteEditor from "./components/NoteEditor";
 
 const HomePage = () => {
   const [notes, setNotes] = useState<any[]>([]);
@@ -17,7 +18,6 @@ const HomePage = () => {
         const data = await res.json();
         setNotes(data);
         setLoading(false);
-        console.log(data);
       } catch (error: any) {
         setError(error.message);
         setLoading(false);
@@ -41,7 +41,7 @@ const HomePage = () => {
                   <h3>{note.title}</h3>
                   <p>
                     Last updated:
-                    {moment(note.updatedAt).format("ddd DD-MMM-YY HH:mm")}
+                    {moment(note.updatedAt).format("ddd DD-MMM-YY HH:mm A")}
                   </p>
                 </div>
                 <div className="note-card-body">
@@ -56,7 +56,7 @@ const HomePage = () => {
             ))}
         </div>
       </div>
-      <div className="right"></div>
+      <NoteEditor />
     </div>
   );
 };
