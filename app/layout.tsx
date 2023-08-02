@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import "../styles/global.sass";
+import { ProjectContextProvider } from "./context/ProjectContext";
 
 export const metadata: Metadata = {
   title: "Too Doo",
@@ -15,13 +16,15 @@ export default function RootLayout({
 }) {
   return (
     <>
-      <html lang="en">
-        <body>
-          <Navbar />
-          {children}
-          <Footer />
-        </body>
-      </html>
+      <ProjectContextProvider>
+        <html lang="en">
+          <body>
+            <Navbar />
+            {children}
+            <Footer />
+          </body>
+        </html>
+      </ProjectContextProvider>
     </>
   );
 }
