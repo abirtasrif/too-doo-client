@@ -1,31 +1,25 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import moment from "moment";
 import NoteEditor from "./components/NoteEditor";
+import { useProjectContext } from "./hooks/useProjectContext";
 
 const HomePage = () => {
-  const [notes, setNotes] = useState<any[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const { notes, dispatch } = useProjectContext();
 
   useEffect(() => {
     const getNotes = async () => {
-      try {
-        setLoading(true);
-        const res = await fetch("http://localhost:5000/api/notes");
-        if (!res.ok) throw new Error("Something went wrong");
-        const data = await res.json();
-        setNotes(data);
-        setLoading(false);
-      } catch (error: any) {
-        setError(error.message);
-        setLoading(false);
+      const res = await fetch("http://localhost:5000/api/notes");
+      const data = await res.json();
+
+      if (res.ok) {
+        dispatch({ type: "SET_NOTES", payload: data });
       }
     };
 
     getNotes();
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="main">
@@ -33,7 +27,7 @@ const HomePage = () => {
         <h2>My Notes</h2>
         <div className="notes-wrapper">
           {notes &&
-            notes.map((note) => (
+            notes.map((note: any) => (
               //statrting note card
               <div key={note._id}>
                 <div className="note-card-title">

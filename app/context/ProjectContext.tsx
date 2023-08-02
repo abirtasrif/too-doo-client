@@ -20,7 +20,7 @@ export const noteReducer = (state: any, action: any) => {
   }
 };
 
-export const ProjectContext = createContext(initialState);
+export const ProjectContext = createContext(initialState); //??
 
 type ProjectContextProviderProps = {
   children: ReactNode;
