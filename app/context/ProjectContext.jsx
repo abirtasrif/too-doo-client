@@ -1,11 +1,12 @@
 "use client";
-import { createContext, useReducer, ReactNode } from "react";
+
+import { createContext, useReducer } from "react";
 
 const initialState = {
   notes: [],
 };
 
-export const noteReducer = (state: any, action: any) => {
+export const noteReducer = (state, action) => {
   switch (action.type) {
     case "SET_NOTES":
       return {
@@ -20,15 +21,9 @@ export const noteReducer = (state: any, action: any) => {
   }
 };
 
-export const ProjectContext = createContext(initialState); //??
+export const ProjectContext = createContext(); //??
 
-type ProjectContextProviderProps = {
-  children: ReactNode;
-};
-
-export const ProjectContextProvider: React.FC<ProjectContextProviderProps> = ({
-  children,
-}) => {
+export const ProjectContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(noteReducer, initialState);
 
   return (

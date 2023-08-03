@@ -27,7 +27,7 @@ const HomePage = () => {
         <h2>My Notes</h2>
         <div className="notes-wrapper">
           {notes &&
-            notes.map((note: any) => (
+            notes.map((note) => (
               //statrting note card
               <div key={note._id}>
                 <div className="note-card-title">

@@ -1,35 +1,37 @@
 import { useState } from "react";
+import { useProjectContext } from "../hooks/useProjectContext";
 
 const NoteEditor = () => {
-  const [title, setTile] = useState("");
-  const [body, setBody] = useState("");
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
   const [error, setError] = useState(null);
+  const { dispatch } = useProjectContext();
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const note = { title, body };
+    const noteObj = { title, content };
 
     const res = await fetch("http://localhost:5000/api/notes", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(note),
+      body: JSON.stringify(noteObj),
     });
     const data = await res.json();
 
-    //!req.ok, set error
+    //!res.ok, set error
     if (!res.ok) {
       setError(data.error);
     }
 
-    //req.ok, reset
+    //res.ok, reset
     if (res.ok) {
-      setTile("");
-      setBody("");
+      setTitle("");
+      setContent("");
       setError(null);
-      console.log("note added to db", data);
+      dispatch({ type: "CREATE_NOTES", payload: data });
     }
   };
 
@@ -44,18 +46,18 @@ const NoteEditor = () => {
           placeholder="Today's priority"
           id="title"
           value={title}
-          onChange={(e) => setTile(e.target.value)}
+          onChange={(e) => setTitle(e.target.value)}
         />
       </div>
 
       <div className="form-control">
-        <label htmlFor="body">Note Body</label>
+        <label htmlFor="content">Note Body</label>
         <input
           type="text"
           placeholder="Have to give feedback to supplier before leaving office today"
-          id="body"
-          value={body}
-          onChange={(e) => setBody(e.target.value)}
+          id="content"
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
         />
       </div>
 
