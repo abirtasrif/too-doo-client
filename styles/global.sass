@@ -18,9 +18,11 @@ $lt-dark: #111618cc
 $light: #b8ead9
 $green: #c0f984
 $red: #fd593d
+$yellow: #FDB850
 $textBig: 30px
 $textSmall: 15px
 $padding: 3rem
+$padding-sm: 0.5rem
 $titleFont: "Bubblegum Sans", cursive
 $noteFont: "Kalam", cursive
 
@@ -67,8 +69,9 @@ $noteFont: "Kalam", cursive
   color: $dark
   min-height: 75vh
   font-family: $noteFont
-  padding: $padding $padding 0 $padding
+  padding: 1rem $padding 0 $padding
   font-size: 20px
+
 
 .notes-wrapper
   display: flex
@@ -76,11 +79,39 @@ $noteFont: "Kalam", cursive
   gap: 2rem
 
 .notes-wrapper
-  h3
+  div#note-card
+      padding: $padding-sm
+      width: 285px
+
+.notes-wrapper
+  div.new-note
+      background-color: $lt-dark !important
+      color: $light
+      border: 5px dashed $red
+      border-radius: 15px
+      font-size: 30px
+
+.notes-wrapper
+  div#note-card:nth-child(3n+1) 
+      background-color: $red
+
+
+.notes-wrapper
+  div#note-card:nth-child(3n+2)
+      background-color: $green
+
+
+  .notes-wrapper
+  div#note-card:nth-child(3n+3)
+      background-color: $yellow
+
+
+.notes-wrapper
+  h3, .note-card-body
     overflow: hidden
     white-space: nowrap
     text-overflow: ellipsis
-    max-width: 200px
+    max-width: 250px
 
 .note-card-buttons
   display: flex
@@ -90,5 +121,4 @@ $noteFont: "Kalam", cursive
   button
     padding: 0.5rem
     border-radius: 5rem
-    
     
