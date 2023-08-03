@@ -2,12 +2,12 @@
 import { createContext, useReducer, ReactNode } from "react";
 
 const initialState = {
-  notes: null,
+  notes: [],
 };
 
 export const noteReducer = (state: any, action: any) => {
   switch (action.type) {
-    case "GET_NOTES":
+    case "SET_NOTES":
       return {
         notes: action.payload,
       };
