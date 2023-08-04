@@ -15,6 +15,7 @@
 // variables
 $dark: #111618
 $lt-dark: #111618cc
+$shadow-color: #1116182c
 $light: #b8ead9
 $green: #c0f984
 $red: #fd593d
@@ -45,7 +46,7 @@ $noteFont: "Kalam", cursive
 .footer 
   height: 5rem
   font-family: $titleFont
-  background-color: $lt-dark
+  background-color: $dark 
 
 
 
@@ -69,19 +70,23 @@ $noteFont: "Kalam", cursive
   color: $dark
   min-height: 75vh
   font-family: $noteFont
-  padding: 1rem $padding 0 $padding
+  padding: 1rem $padding
   font-size: 20px
 
 
 .notes-wrapper
   display: flex
   flex-wrap: wrap
-  gap: 2rem
+  gap:1.8rem
+  padding: 0.8rem
 
 .notes-wrapper
   div#note-card
       padding: $padding-sm
       width: 285px
+      height: 250px
+      box-shadow: 0 0 10px 5px $shadow-color
+      overflow-y: hidden
 
 .notes-wrapper
   div.new-note
@@ -90,10 +95,16 @@ $noteFont: "Kalam", cursive
       border: 5px dashed $red
       border-radius: 15px
       font-size: 30px
+      display: flex
+      flex-direction: column
+      align-items: center
+      padding-top: 5rem !important
+      
 
 .notes-wrapper
   div#note-card:nth-child(3n+1) 
       background-color: $red
+      
 
 
 .notes-wrapper
