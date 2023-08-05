@@ -1,12 +1,21 @@
 import React from "react";
 import moment from "moment";
+import { useProjectContext } from "../hooks/useProjectContext";
 
 const Notemodules = ({ note }) => {
+  const { dispatch } = useProjectContext();
   const handleDelete = async () => {
     const res = await fetch(`http://localhost:5000/api/notes/${note._id}`, {
       method: "DELETE",
     });
     const json = await res.json();
+
+    if (res.ok) {
+      dispatch({
+        type: "DELETE_NOTE",
+        payload: json,
+      });
+    }
   };
 
   return (
