@@ -5,6 +5,7 @@ const NoteEditor = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [error, setError] = useState(null);
+  const [emptyFields, setEmptyFields] = useState([]);
   const { dispatch } = useProjectContext();
 
   const handleSubmit = async (e) => {
@@ -24,6 +25,7 @@ const NoteEditor = () => {
     //!res.ok, set error
     if (!res.ok) {
       setError(data.error);
+      setEmptyFields(data.emptyFields);
     }
 
     //res.ok, reset
@@ -47,6 +49,9 @@ const NoteEditor = () => {
           id="title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
+          className={`${
+            emptyFields.includes(`title`) ? "border-red" : "border-normal"
+          }`}
         />
       </div>
 
@@ -58,6 +63,9 @@ const NoteEditor = () => {
           id="content"
           value={content}
           onChange={(e) => setContent(e.target.value)}
+          className={`${
+            emptyFields.includes(`content`) ? "border-red" : "border-normal"
+          }`}
         />
       </div>
 
