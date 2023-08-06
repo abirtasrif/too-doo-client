@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useProjectContext } from "../hooks/useProjectContext";
 
-const NoteEditor = () => {
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
+const NoteEditor = ({ note, setIsModalOpen, setIsOverlayOpen }) => {
+  const [title, setTitle] = useState(note ? note.title : "");
+  const [content, setContent] = useState(note ? note.content : "");
   const [error, setError] = useState(null);
   const [emptyFields, setEmptyFields] = useState([]);
   const { dispatch } = useProjectContext();
@@ -13,33 +13,68 @@ const NoteEditor = () => {
 
     const noteObj = { title, content };
 
-    const res = await fetch("http://localhost:5000/api/notes", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(noteObj),
-    });
-    const data = await res.json();
+    if (!note) {
+      const res = await fetch("http://localhost:5000/api/notes", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(noteObj),
+      });
+      const data = await res.json();
 
-    //!res.ok, set error
-    if (!res.ok) {
-      setError(data.error);
-      setEmptyFields(data.emptyFields);
+      if (!res.ok) {
+        setError(data.error);
+        setEmptyFields(data.emptyFields);
+      }
+
+      if (res.ok) {
+        setTitle("");
+        setContent("");
+        setError(null);
+        setEmptyFields([]);
+        dispatch({ type: "CREATE_NOTES", payload: data });
+      }
+
+      return;
     }
 
-    //res.ok, reset
-    if (res.ok) {
-      setTitle("");
-      setContent("");
-      setError(null);
-      dispatch({ type: "CREATE_NOTES", payload: data });
+    //if(note), send patch
+    if (note) {
+      const res = await fetch(`http://localhost:5000/api/notes/${note._id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(noteObj),
+      });
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.error);
+        setEmptyFields(data.emptyFields);
+      }
+
+      if (res.ok) {
+        setError(null);
+        setEmptyFields([]);
+        //dispatch
+        dispatch({
+          type: "UPDATE_NOTE",
+          payload: data,
+        });
+        //close hover
+        setIsModalOpen(false);
+        setIsOverlayOpen(false);
+      }
+
+      return;
     }
   };
 
   return (
     <form className="note-form" onSubmit={handleSubmit}>
-      <h2>Add a new note</h2>
+      <h2 className={`note-header ${note ? "hidden" : ""}`}>Add a new note</h2>
 
       <div className="form-control">
         <label htmlFor="title">Note Title</label>
@@ -69,7 +104,7 @@ const NoteEditor = () => {
         />
       </div>
 
-      <button type="submit">Add Note</button>
+      <button type="submit">{note ? "Confirm Update" : "Add Note"}</button>
       {error && <p>{error}</p>}
     </form>
   );

@@ -21,6 +21,19 @@ export const noteReducer = (state, action) => {
         ...state,
         notes: state.notes.filter((note) => note._id !== action.payload._id),
       };
+    case "UPDATE_NOTE":
+      const [existingNote] = state.notes.filter(
+        (note) => note._id === action.payload._id
+      );
+
+      return {
+        ...state,
+        notes: [
+          action.payload,
+          ...state.notes.filter((note) => note._id !== existingNote._id),
+        ],
+      };
+
     default:
       return state;
   }

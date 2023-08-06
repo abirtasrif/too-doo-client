@@ -28,6 +28,12 @@ $titleFont: "Bubblegum Sans", cursive
 $noteFont: "Kalam", cursive
 
 
+.hidden
+  visibility: hidden
+
+// .relative
+//   position: relative
+
 .navbar 
   font-size: $textBig
   padding: 1.1rem $padding 0 $padding
@@ -72,6 +78,7 @@ $noteFont: "Kalam", cursive
   font-family: $noteFont
   padding: 1rem $padding
   font-size: 20px
+  
 
 
 .notes-wrapper
@@ -142,3 +149,28 @@ input.border-normal
 input.border-red
     border: 2px solid $red
 
+#note-card
+  .overlay
+    position: fixed
+    top: 5rem
+    left: 3rem
+    width: calc( 100% - 6rem )
+    height: calc( 100% - 10rem )
+    background-color: rgba(0, 0, 0, 0.08) 
+    backdrop-filter: blur(15px)
+    z-index: 10
+
+.cancel-button
+  position: absolute
+  top:1rem
+  right: 1rem
+  font-size: 3rem
+  color: $dark
+
+.modal
+  width: 35rem
+  position: fixed
+  top: 50%
+  left: 50%
+  transform: translate(-50%, -50%)
+  z-index: 20
