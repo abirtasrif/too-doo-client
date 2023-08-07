@@ -11,8 +11,8 @@ import Notemodules from "./components/Notemodules";
 
 const HomePage = () => {
   const { notes, dispatch } = useProjectContext();
-  const { user } = useAuthContext();
-  const router = useRouter();
+  // const { user } = useAuthContext();
+  // const router = useRouter();
 
   // if (!user) {
   //   router.push("/login");
