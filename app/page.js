@@ -27,7 +27,7 @@ const HomePage = () => {
 
   useEffect(() => {
     const getNotes = async () => {
-      const res = await fetch("http://localhost:5000/api/notes");
+      const res = await fetch(`${process.env.NEXT_APP_BASE_URL}/api/notes`);
       const data = await res.json();
 
       if (res.ok) {

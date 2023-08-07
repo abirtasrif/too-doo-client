@@ -19,7 +19,7 @@ const NoteEditor = ({ note, setIsModalOpen, setIsOverlayOpen }) => {
     const noteObj = { title, content };
 
     if (!note) {
-      const res = await fetch("http://localhost:5000/api/notes", {
+      const res = await fetch(`${process.env.NEXT_APP_BASE_URL}/api/notes`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -46,13 +46,16 @@ const NoteEditor = ({ note, setIsModalOpen, setIsOverlayOpen }) => {
 
     //if(note), send patch
     if (note) {
-      const res = await fetch(`http://localhost:5000/api/notes/${note._id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(noteObj),
-      });
+      const res = await fetch(
+        `${process.env.NEXT_APP_BASE_URL}/api/notes/${note._id}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(noteObj),
+        }
+      );
       const data = await res.json();
 
       if (!res.ok) {
