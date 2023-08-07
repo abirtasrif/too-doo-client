@@ -6,7 +6,12 @@ const NoteEditor = ({ note, setIsModalOpen, setIsOverlayOpen }) => {
   const [content, setContent] = useState(note ? note.content : "");
   const [error, setError] = useState(null);
   const [emptyFields, setEmptyFields] = useState([]);
+  const [isDone, setIsDone] = useState(false);
   const { dispatch } = useProjectContext();
+
+  // const handleCheckboxChange = (e) => {
+  //   setIsDone(e.target.checked);
+  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -103,6 +108,14 @@ const NoteEditor = ({ note, setIsModalOpen, setIsOverlayOpen }) => {
           }`}
         />
       </div>
+      {/* <label>
+        <input
+          type="checkbox"
+          checked={isDone}
+          onChange={handleCheckboxChange}
+        />
+        Mark as Completed
+      </label> */}
 
       <button type="submit">{note ? "Confirm Update" : "Add Note"}</button>
       {error && <p>{error}</p>}
