@@ -6,9 +6,18 @@ import NoteEditor from "./components/NoteEditor";
 import { useProjectContext } from "./hooks/useProjectContext";
 import { BsPencilSquare } from "react-icons/bs";
 import Notemodules from "./components/Notemodules";
+// import { useAuthContext } from "./hooks/useAuthContext";
+// import { useRouter } from "next/router";
 
 const HomePage = () => {
   const { notes, dispatch } = useProjectContext();
+  const { user } = useAuthContext();
+  const router = useRouter();
+
+  // if (!user) {
+  //   router.push("/login");
+  //   return null;
+  // }
 
   useEffect(() => {
     const getNotes = async () => {

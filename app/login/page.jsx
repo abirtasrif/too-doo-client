@@ -1,12 +1,21 @@
 "use client";
 import { useState } from "react";
+import { useLogin } from "../hooks/useLogin";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const { login, error, loading } = useLogin();
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    await login(email, password);
+  };
+
   return (
-    <div className="login-form">
+    <form onSubmit={handleLogin} className="login-form">
       <h2 className="login">Login</h2>
 
       <div className="form-control">
@@ -31,8 +40,12 @@ const Login = () => {
         />
       </div>
 
-      <button type="submit">Log In</button>
-    </div>
+      <button disabled={loading} type="submit">
+        Log In
+      </button>
+
+      {error && <p>{error}</p>}
+    </form>
   );
 };
 

@@ -1,12 +1,20 @@
 "use client";
 import { useState } from "react";
+import { useSignup } from "../hooks/useSignup";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const { signup, error, loading } = useSignup();
+
+  const handleSignUp = async (e) => {
+    e.preventDefault();
+    await signup(email, password);
+  };
+
   return (
-    <div className="signup-form">
+    <form className="signup-form" onSubmit={handleSignUp}>
       <h2 className="signup">Sign Up</h2>
 
       <div className="form-control">
@@ -31,8 +39,11 @@ const Signup = () => {
         />
       </div>
 
-      <button type="submit">Sign Up</button>
-    </div>
+      <button disabled={loading} type="submit">
+        Sign Up
+      </button>
+      {error && <p>{error}</p>}
+    </form>
   );
 };
 
