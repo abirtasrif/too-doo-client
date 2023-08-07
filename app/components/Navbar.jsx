@@ -8,7 +8,7 @@ const Navbar = () => {
           Too <span>Doo</span>
         </Link>
 
-        <nav>
+        <nav className="nav-link">
           <Link href="/login">Login</Link>
           <Link href="/signup">Sign Up</Link>
         </nav>

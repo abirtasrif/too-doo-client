@@ -3,10 +3,16 @@ import moment from "moment";
 import { useProjectContext } from "../hooks/useProjectContext";
 import { MdCancel } from "react-icons/md";
 import NoteEditor from "./NoteEditor";
+import {
+  RiFileEditFill,
+  RiDeleteBin2Fill,
+  RiCheckDoubleFill,
+} from "react-icons/ri";
 
 const Notemodules = ({ note }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isoverlayOpen, setIsOverlayOpen] = useState(false);
+  const [isNoteOpen, setIsNoteOpen] = useState(false);
 
   const { dispatch } = useProjectContext();
   const handleDelete = async () => {
@@ -34,16 +40,15 @@ const Notemodules = ({ note }) => {
     console.log("test");
   };
 
+  // const handleNoteWindow = () => {
+  //   setIsNoteOpen(true);
+  //   setIsOverlayOpen(true);
+  // };
+
   return (
     //statrting note card
-    <div
-      key={note._id}
-      id="note-card"
-      // onClick={handleUpdate}
-      // style={{ cursor: "pointer" }}
-    >
+    <div key={note._id} id="note-card">
       <div className="note-card-title">
-        <span>ID: {note._id}</span>
         <h3>{note.title}</h3>
         <p>
           Last updated:
@@ -54,9 +59,15 @@ const Notemodules = ({ note }) => {
         <p>{note.content}</p>
       </div>
       <div className="note-card-buttons">
-        <button onClick={handleUpdate}>Update</button>
-        <button onClick={handleDelete}>Delete</button>
-        <button>Mark Done</button>
+        <button onClick={handleUpdate}>
+          <RiFileEditFill className="icon" />
+        </button>
+        <button onClick={handleDelete}>
+          <RiDeleteBin2Fill className="icon" />
+        </button>
+        <button>
+          <RiCheckDoubleFill className="icon" />
+        </button>
       </div>
 
       {/* Overlay */}

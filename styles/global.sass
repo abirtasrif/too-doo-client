@@ -31,12 +31,24 @@ $noteFont: "Kalam", cursive
 .hidden
   visibility: hidden
 
-// .relative
-//   position: relative
 
 .navbar 
   font-size: $textBig
   padding: 1.1rem $padding 0 $padding
+  
+
+.navbar
+  h3
+    display: flex
+    justify-content: space-between
+
+.navbar
+  h3
+    .nav-link
+      display: flex
+      gap: 1rem
+      font-size: 1.5rem
+      padding-top: .5rem
 
 .navbar
   span 
@@ -106,6 +118,9 @@ $noteFont: "Kalam", cursive
       flex-direction: column
       align-items: center
       padding-top: 5rem !important
+
+.notes-wrapper
+  div.note-window
       
 
 .notes-wrapper
@@ -133,12 +148,14 @@ $noteFont: "Kalam", cursive
 
 .note-card-buttons
   display: flex
-  gap: 1rem
+  justify-content: space-between
 
 .note-card-buttons
   button
-    padding: 0.5rem
-    border-radius: 5rem
+    .icon
+    padding: 0.9rem 1rem
+    border-radius: 50%
+    margin: 1rem 0
 
 
 input.border-normal

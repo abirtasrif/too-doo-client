@@ -1,15 +1,17 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import NoteEditor from "./components/NoteEditor";
 import { useProjectContext } from "./hooks/useProjectContext";
 import { BsPencilSquare } from "react-icons/bs";
 import Notemodules from "./components/Notemodules";
+
 // import { useAuthContext } from "./hooks/useAuthContext";
 // import { useRouter } from "next/router";
 
 const HomePage = () => {
+  const [isNewNoteOpen, setIsNewNoteOpen] = useState(false);
   const { notes, dispatch } = useProjectContext();
   // const { user } = useAuthContext();
   // const router = useRouter();
@@ -18,6 +20,10 @@ const HomePage = () => {
   //   router.push("/login");
   //   return null;
   // }
+
+  const handleNewNote = () => {
+    setIsNewNoteOpen(true);
+  };
 
   useEffect(() => {
     const getNotes = async () => {
@@ -37,7 +43,7 @@ const HomePage = () => {
       <h2>My Notes</h2>
       <div className="notes-wrapper">
         {/* new note card */}
-        <div id="note-card" className="new-note">
+        <div id="note-card" className="new-note" onClick={handleNewNote}>
           <BsPencilSquare />
           <p>Add a New Note</p>
         </div>
